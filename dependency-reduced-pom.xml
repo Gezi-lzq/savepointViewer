@@ -84,7 +84,7 @@
         </dependency>
         <dependency>
           <groupId>org.apache.flink</groupId>
-          <artifactId>flink-streaming-java</artifactId>
+          <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
           <version>${flink.version}</version>
           <scope>compile</scope>
         </dependency>
@@ -112,7 +112,7 @@
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <flink.version>1.17.0</flink.version>
+    <flink.version>1.12.1</flink.version>
   </properties>
 </project>
 
