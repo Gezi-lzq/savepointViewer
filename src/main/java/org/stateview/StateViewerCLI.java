@@ -120,11 +120,13 @@ public class StateViewerCLI implements Callable<Integer> {
                 .bootstrapWith(env.fromElements(Tuple2.of(new KafkaTopicPartition("topic", 0), 0L)))
                 .transform(new EmptyStateBootstrapFunction<>());
             ExistingSavepoint existingSavepoint = Savepoint.load(env, savepointPath, new FsStateBackend(file.toURI()));
+            String modifyUid = operatorUid + "-deleted";
+
             // Update Savepoint
             existingSavepoint
                 .removeOperator(operatorUid)
                 // TODO - Add new operator with new state
-                .withOperator("tmp", bootstrapTransformation)
+                .withOperator(modifyUid, bootstrapTransformation)
                 .write(newSavepointPath);
             env.execute();
             System.out.println("Operator state updated successfully. New savepoint is saved at " + newSavepointPath);
