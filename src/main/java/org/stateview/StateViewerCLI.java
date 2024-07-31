@@ -3,8 +3,11 @@ package org.stateview;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.runtime.checkpoint.OperatorState;
+import org.apache.flink.runtime.checkpoint.metadata.CheckpointMetadata;
 import org.apache.flink.runtime.state.FunctionInitializationContext;
 import org.apache.flink.runtime.state.FunctionSnapshotContext;
+import org.apache.flink.runtime.state.StateBackend;
 import org.apache.flink.runtime.state.filesystem.FsStateBackend;
 import org.apache.flink.runtime.state.memory.MemoryStateBackend;
 import org.apache.flink.state.api.BootstrapTransformation;
@@ -13,6 +16,8 @@ import org.apache.flink.state.api.OperatorTransformation;
 import org.apache.flink.state.api.Savepoint;
 import org.apache.flink.state.api.functions.StateBootstrapFunction;
 import org.apache.flink.state.api.runtime.OperatorIDGenerator;
+import org.apache.flink.state.api.runtime.SavepointLoader;
+import org.apache.flink.state.api.runtime.metadata.SavepointMetadata;
 import org.apache.flink.streaming.connectors.kafka.internals.KafkaTopicPartition;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -20,7 +25,12 @@ import picocli.CommandLine.Parameters;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 
 @Command(name = "state-viewer", mixinStandardHelpOptions = true, version = "1.0",
     subcommands = {StateViewerCLI.ViewCommand.class, StateViewerCLI.UpdateCommand.class},
@@ -114,23 +124,57 @@ public class StateViewerCLI implements Callable<Integer> {
             File file = new File(savepointPath);
             String newSavepointPath = file.getParent() + "/" + file.getName() + "-new";
             final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-
             // Create new Operator Transformation
             BootstrapTransformation<Tuple2<KafkaTopicPartition, Long>> bootstrapTransformation = OperatorTransformation
                 .bootstrapWith(env.fromElements(Tuple2.of(new KafkaTopicPartition("topic", 0), 0L)))
                 .transform(new EmptyStateBootstrapFunction<>());
-            ExistingSavepoint existingSavepoint = Savepoint.load(env, savepointPath, new FsStateBackend(file.toURI()));
-            String modifyUid = operatorUid + "-deleted";
 
+            ExistingSavepoint existingSavepoint;
+
+            if (operatorUidHash != null) {
+                existingSavepoint = loadSavePoint(env, file, operatorUidHash);
+            } else {
+                existingSavepoint = Savepoint.load(env, savepointPath, new FsStateBackend(file.toURI()))
+                    .removeOperator(operatorUid);
+            }
+            String modifyUid = operatorUid + "-deleted";
             // Update Savepoint
             existingSavepoint
-                .removeOperator(operatorUid)
-                // TODO - Add new operator with new state
                 .withOperator(modifyUid, bootstrapTransformation)
                 .write(newSavepointPath);
             env.execute();
             System.out.println("Operator state updated successfully. New savepoint is saved at " + newSavepointPath);
             return 0;
         }
+    }
+
+    private static ExistingSavepoint loadSavePoint(ExecutionEnvironment env, File file, String uidhash) throws IOException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        CheckpointMetadata metadata = SavepointLoader.loadSavepointMetadata(file.getPath());
+        List<OperatorState> operatorStates = metadata.getOperatorStates().stream().filter(
+            operatorState -> !operatorState.getOperatorID().toHexString().equals(uidhash)
+        ).collect(Collectors.toList());
+        int maxParallelism =
+            metadata.getOperatorStates().stream()
+                .map(OperatorState::getMaxParallelism)
+                .max(Comparator.naturalOrder())
+                .orElseThrow(
+                    () ->
+                        new RuntimeException(
+                            "Savepoint must contain at least one operator state."));
+        SavepointMetadata savepointMetadata =
+            new SavepointMetadata(
+                maxParallelism, metadata.getMasterStates(), operatorStates);
+        return createExistingSavepoint(env, savepointMetadata, new FsStateBackend(file.toURI()));
+    }
+
+    private static ExistingSavepoint createExistingSavepoint(ExecutionEnvironment env, SavepointMetadata metadata, StateBackend stateBackend) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        Class<?> clazz = ExistingSavepoint.class;
+        Constructor<?> constructor = clazz.getDeclaredConstructor(
+            ExecutionEnvironment.class,
+            SavepointMetadata.class,
+            StateBackend.class
+        );
+        constructor.setAccessible(true);
+        return (ExistingSavepoint) constructor.newInstance(env, metadata, stateBackend);
     }
 }
