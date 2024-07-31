@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="33a01f96-f2cc-4ff8-ad52-d616d791098f" name="Changes" comment="feat: update readme" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "contexts": [
+    {
+      "name": "default"
+    }
+  ],
+  "isMigrated": true
+}]]></component>
+  <component name="KubernetesSettings">
+    <option name="contextName" value="default" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2jxG6zo9qg5tV3Pt86fcQSSqc7c" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.StateViewer.executor": "Debug",
+    "Application.StateViewerCLI.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "flink-1.17",
+    "jdk.selected.JAVA_MODULE": "corretto-11",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/gezi/Dev/savepointViewer/poms",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.61264366",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/poms" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.stateview" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.stateview" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.StateViewerCLI">
+    <configuration name="StateViewer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="org.stateview.StateViewer" />
+      <module name="savepointViewer" />
+      <option name="VM_PARAMETERS" value="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.stateview.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StateViewerCLI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.stateview.StateViewerCLI" />
+      <module name="savepointViewer" />
+      <option name="PROGRAM_PARAMETERS" value="removeAndUpdate $PROJECT_DIR$/../tmp/savepoint-03503c-0b141632f106 -uid source" />
+      <option name="VM_PARAMETERS" value="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.stateview.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.StateViewerCLI" />
+      <item itemvalue="Application.StateViewer" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.StateViewerCLI" />
+        <item itemvalue="Application.StateViewer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-11.0.22-corretto-11.0.22-3183f394aec4-fdae186d" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="33a01f96-f2cc-4ff8-ad52-d616d791098f" name="Changes" comment="" />
+      <created>1722321149960</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722321149960</updated>
+      <workItem from="1722321151168" duration="35635000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: add StateViewerCLI">
+      <option name="closed" value="true" />
+      <created>1722405864167</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722405864167</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: StateViewerCLI for flink-1.17">
+      <option name="closed" value="true" />
+      <created>1722405939273</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722405939273</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: add catch for parser">
+      <option name="closed" value="true" />
+      <created>1722415409118</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722415409118</updated>
+    </task>
+    <task id="LOCAL-00004" summary="chore: modify modifyUid">
+      <option name="closed" value="true" />
+      <created>1722416569831</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722416569831</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: support the use of uidhash for deletion">
+      <option name="closed" value="true" />
+      <created>1722421391872</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722421391872</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: remove useless code">
+      <option name="closed" value="true" />
+      <created>1722424456296</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722424456296</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: remove useless code">
+      <option name="closed" value="true" />
+      <created>1722424553039</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722424553039</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: remove useless code">
+      <option name="closed" value="true" />
+      <created>1722424593161</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1722424593161</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: remove useless code">
+      <option name="closed" value="true" />
+      <created>1722424621794</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722424621794</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: add readme">
+      <option name="closed" value="true" />
+      <created>1722425215415</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722425215415</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: modify script">
+      <option name="closed" value="true" />
+      <created>1722425388815</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1722425388815</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: update readme">
+      <option name="closed" value="true" />
+      <created>1722425724881</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1722425724881</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: add StateViewerCLI" />
+    <MESSAGE value="feat: StateViewerCLI for flink-1.17" />
+    <MESSAGE value="feat: add catch for parser" />
+    <MESSAGE value="chore: modify modifyUid" />
+    <MESSAGE value="feat: support the use of uidhash for deletion" />
+    <MESSAGE value="feat: remove useless code" />
+    <MESSAGE value="feat: add readme" />
+    <MESSAGE value="feat: modify script" />
+    <MESSAGE value="feat: update readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: update readme" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.flink.runtime.checkpoint.OperatorState" memberName="operatorSubtaskStates" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
