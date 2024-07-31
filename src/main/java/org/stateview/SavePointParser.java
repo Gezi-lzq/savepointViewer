@@ -107,6 +107,9 @@ public class SavePointParser {
 
                 keyedStateContents.add(new ManagedKeyedStateContent(keyGroupRange,
                     serializationProxy.getStateMetaInfoSnapshots()));
+            } catch (Exception e) {
+                System.out.println("Error parsing keyed state: " + e.getMessage());
+                keyedStateContents.add(new ManagedKeyedStateContent(keyGroupRange, new ArrayList<>()));
             }
         }
         return keyedStateContents;
