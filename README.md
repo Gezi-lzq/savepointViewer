@@ -53,19 +53,19 @@ Update the state of a specific operator in the Savepoint.
 **View the state of all operators:**
 
 ```
-java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer view /path/to/savepoint
+java -jar savepointViewer-1.0-SNAPSHOT.jar view /path/to/savepoint
 ```
 
 **View the state of an operator:**
 
 ```
-java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer view /path/to/savepoint -uid <operator-id>
+java -jar savepointViewer-1.0-SNAPSHOT.jar view /path/to/savepoint -uid <operator-id>
 ```
 
 **Remove a state entry from an operator:**
 
 ```
-java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer removeAndUpdate /path/to/savepoint -uid <operator-id>
+java -jar savepointViewer-1.0-SNAPSHOT.jar removeAndUpdate /path/to/savepoint -uid <operator-id>
 ```
 
 
@@ -74,3 +74,5 @@ java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer removeAndUpdate /path/to
 **Build from source:**
 - Clone the repository.
 - Run `mvn clean install`.
+
+
