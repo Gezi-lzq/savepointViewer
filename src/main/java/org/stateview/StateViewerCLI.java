@@ -5,14 +5,15 @@ import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.runtime.state.FunctionInitializationContext;
 import org.apache.flink.runtime.state.FunctionSnapshotContext;
-import org.apache.flink.runtime.state.filesystem.FsStateBackend;
+import org.apache.flink.runtime.state.hashmap.HashMapStateBackend;
 import org.apache.flink.runtime.state.memory.MemoryStateBackend;
-import org.apache.flink.state.api.BootstrapTransformation;
 import org.apache.flink.state.api.ExistingSavepoint;
-import org.apache.flink.state.api.OperatorTransformation;
+import org.apache.flink.state.api.OperatorIdentifier;
 import org.apache.flink.state.api.Savepoint;
+import org.apache.flink.state.api.SavepointWriter;
 import org.apache.flink.state.api.functions.StateBootstrapFunction;
 import org.apache.flink.state.api.runtime.OperatorIDGenerator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.internals.KafkaTopicPartition;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -104,30 +105,25 @@ public class StateViewerCLI implements Callable<Integer> {
 
         // Other parameters, such as new Operator ID, new state, etc.
 
-        @Override
         public Integer call() throws Exception {
             // Ensure only one of -uid or -uidhash is provided
             if (((operatorUid == null) && (operatorUidHash == null)) ||
                 ((operatorUid != null) && (operatorUidHash != null))) {
                 throw new IllegalArgumentException("Please provide either -uid or -uidhash, but not both.");
             }
+            StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
             File file = new File(savepointPath);
             String newSavepointPath = file.getParent() + "/" + file.getName() + "-new";
-            final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-
-            // Create new Operator Transformation
-            BootstrapTransformation<Tuple2<KafkaTopicPartition, Long>> bootstrapTransformation = OperatorTransformation
-                .bootstrapWith(env.fromElements(Tuple2.of(new KafkaTopicPartition("topic", 0), 0L)))
-                .transform(new EmptyStateBootstrapFunction<>());
-            ExistingSavepoint existingSavepoint = Savepoint.load(env, savepointPath, new FsStateBackend(file.toURI()));
-            // Update Savepoint
-            existingSavepoint
-                .removeOperator(operatorUid)
-                // TODO - Add new operator with new state
-                .withOperator("tmp", bootstrapTransformation)
+            String uidhash = operatorUidHash != null ? operatorUidHash : OperatorIDGenerator.fromUid(operatorUid).toHexString();
+            OperatorIdentifier originalUid = OperatorIdentifier.forUidHash(uidhash);
+            OperatorIdentifier modifyUid = OperatorIdentifier.forUid(uidhash + "-deleted");
+            SavepointWriter.fromExistingSavepoint(env, savepointPath, new HashMapStateBackend())
+                .changeOperatorIdentifier(
+                    originalUid,
+                    modifyUid)
                 .write(newSavepointPath);
             env.execute();
-            System.out.println("Operator state updated successfully. New savepoint is saved at " + newSavepointPath);
+            System.out.println("Operator state updated successfully. New savepoint is saved at " + newSavepointPath + ". change Operator ID from " + originalUid + " to " + modifyUid);
             return 0;
         }
     }
