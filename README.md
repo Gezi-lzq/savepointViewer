@@ -22,19 +22,50 @@ Commands:
 view             View the state of a specific operator in the Savepoint.
 removeAndUpdate  Update the state of a specific operator in the Savepoint.
 ```
+### view
+
+```
+Usage: state-viewer view [-uid=<operatorUid>] [-uidhash=<operatorUidHash>]
+                         <savepointPath>
+View the state of a specific operator in the Savepoint.
+      <savepointPath>   Savepoint file path.
+      -uid, --operator-uid=<operatorUid>
+                        Operator UID.
+      -uidhash, --operator-uidhash=<operatorUidHash>
+                        Operator UID Hash.
+```
+
+### removeAndUpdate
+
+```
+Usage: state-viewer removeAndUpdate [-uid=<operatorUid>]
+                                    [-uidhash=<operatorUidHash>] <savepointPath>
+Update the state of a specific operator in the Savepoint.
+      <savepointPath>   Savepoint file path.
+      -uid, --operator-uid=<operatorUid>
+                        Operator UID.
+      -uidhash, --operator-uidhash=<operatorUidHash>
+                        Operator UID Hash.
+```
 
 ### Examples
+
+**View the state of all operators:**
+
+```
+java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer view /path/to/savepoint
+```
 
 **View the state of an operator:**
 
 ```
-java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer view --savepoint-path /path/to/savepoint --operator-id <operator-id>
+java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer view /path/to/savepoint -uid <operator-id>
 ```
 
 **Remove a state entry from an operator:**
 
 ```
-java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer removeAndUpdate --savepoint-path /path/to/savepoint --operator-id <operator-id> --action remove --key <state-key>
+java -jar savepointViewer-1.0-SNAPSHOT.jar state-viewer removeAndUpdate /path/to/savepoint -uid <operator-id>
 ```
 
 
